@@ -1,7 +1,7 @@
 import Head from "next/head";
-import type { GetServerSideProps } from 'next'
-import {groq} from "next-sanity";
-import {sanityClient} from ".././sanity";
+import type { GetServerSideProps } from "next";
+import { groq } from "next-sanity";
+import { sanityClient } from ".././sanity";
 
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -13,7 +13,6 @@ import ContactMe from "@/components/ContactMe";
 import Link from "next/link";
 import { GetStaticProps } from "next";
 import { Project, Skill, Social } from "@/typings";
-
 import { fetchSkills } from "@/utils/fetchSkills";
 import { fetchProjects } from "@/utils/fetchProjects";
 import { fetchScocial } from "@/utils/fetchSocials";
@@ -66,34 +65,30 @@ export default function Home({ skills, projects, socials }: Props) {
   );
 }
 
-export const getServerSideProps = async ()=>{
-  const skillquery=groq`
+export const getServerSideProps = async () => {
+  const skillquery = groq`
   *[_type=="skill"]
-  `
-  const projectquery=groq`
+  `;
+  const projectquery = groq`
 *[_type=="project"]{
     ...,
     technologies[]->
 }
 
-`
-const socialquery=groq`
+`;
+  const socialquery = groq`
 *[_type=="social"]
 
-`
-  const skills:Skill[]=await sanityClient.fetch(skillquery);
-  const projects:Project[]=await sanityClient.fetch(projectquery);
-  const socials:Social[]=await sanityClient.fetch(socialquery);
-
+`;
+  const skills: Skill[] = await sanityClient.fetch(skillquery);
+  const projects: Project[] = await sanityClient.fetch(projectquery);
+  const socials: Social[] = await sanityClient.fetch(socialquery);
 
   return {
-    props:{
+    props: {
       skills,
       projects,
       socials,
-    }
-  }
-}
-
-
-
+    },
+  };
+};

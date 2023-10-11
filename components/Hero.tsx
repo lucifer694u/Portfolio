@@ -21,7 +21,7 @@ function Hero() {
       <BackgroundCircle />
       <img
         className="relative rounded-full h-32 w-32 mx-auto object-cover"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiqkBSlJ475BDZUOL5lezcrY1d9ZQCkSlXvg&usqp=CAU"
+        src="https://media.licdn.com/dms/image/D4D03AQHFQz5MtYBgVA/profile-displayphoto-shrink_400_400/0/1694335823366?e=1702512000&v=beta&t=N9YN-BzKZga-ktfaa1FcreMNXI_X_S_BIyrJ0BQpZe0"
         alt=""
       />
 
