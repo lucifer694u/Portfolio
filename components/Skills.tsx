@@ -29,7 +29,7 @@ function Skills({ skills }: Props) {
         Hover over a skill for currency proficiency
       </h3>
 
-      <div className="grid grid-cols-4 gap-5 absolute top-44">
+      <div className="grid grid-cols-3 md:grid-cols-4 gap-8 md:gap-4 absolute top-[40%] md:top-50">
         {skills?.map((skill) => (
           <Skill key={skill._id} skill={skill} />
         ))}

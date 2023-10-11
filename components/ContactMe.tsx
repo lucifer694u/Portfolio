@@ -24,23 +24,23 @@ function ContactMe({}: Props) {
       </h3>
 
       <div className="flex flex-col space-y-10">
-        <h4 className="text-4xl font-semibold text-center">
+        <h4 className="text-lg md:text-4xl font-semibold text-center">
           I have got just what you need.
           <span className="decoration-[#F7AB0A]/50 underline"> Lets Talk.</span>
         </h4>
         <div className="space-y-10">
           <div className="flex items-center space-x-5 justify-center">
             <PhoneIcon className="text-[#F7AB0A] h-7 w-7 animate-pulse" />
-            <p className="text-2xl">+91 9971200717</p>
+            <p className="md:text-2xl text-lg ">+91 9971200717</p>
           </div>
           <div className="flex items-center space-x-5 justify-center">
             <EnvelopeIcon className="text-[#F7AB0A] h-7 w-7 animate-pulse" />
-            <p className="text-2xl">himanshushrup@outlook.com</p>
+            <p className="md:text-2xl text-lg">himanshushrup@outlook.com</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-2 w-fit mx-auto">
-          <div className="flex space-x-2">
+          <div className="md:flex space-y-2 md:space-y-0 w-20 md:w-fit md:space-x-2">
             <input {...register('name')} placeholder="Name" className="contactInput" type="text" />
             <input {...register('email')}  placeholder="Email" className="contactInput" type="email" />
           </div>
