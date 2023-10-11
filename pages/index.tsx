@@ -1,4 +1,7 @@
 import Head from "next/head";
+import type { GetServerSideProps } from 'next'
+import {groq} from "next-sanity";
+import {sanityClient} from ".././sanity";
 
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -7,7 +10,7 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import ContactMe from "@/components/ContactMe";
-
+import Link from "next/link";
 import { GetStaticProps } from "next";
 import { Project, Skill, Social } from "@/typings";
 
@@ -18,16 +21,16 @@ import { fetchScocial } from "@/utils/fetchSocials";
 type Props = {
   skills: Skill[];
   projects: Project[];
-
+  socials: Social[];
 };
 
-export default function Home({ skills, projects}: Props) {
+export default function Home({ skills, projects, socials }: Props) {
   return (
     <div className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scrollbar scrollbar-track-gray-400/20  scrollbar-thumb-[#F7AB0A]/80">
       <Head>
         <title>Himanshu.dev</title>
       </Head>
-      {/* <Header socials={socials} /> */}
+      <Header socials={socials} />
       {/* hero */}
       <section id="hero" className="snap-start">
         <Hero />
@@ -63,17 +66,34 @@ export default function Home({ skills, projects}: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const skills: Skill[] = await fetchSkills();
-  const projects: Project[] = await fetchProjects();
-  // const socials: Social[] = await fetchScocial();
+export const getServerSideProps = async ()=>{
+  const skillquery=groq`
+  *[_type=="skill"]
+  `
+  const projectquery=groq`
+*[_type=="project"]{
+    ...,
+    technologies[]->
+}
+
+`
+const socialquery=groq`
+*[_type=="social"]
+
+`
+  const skills:Skill[]=await sanityClient.fetch(skillquery);
+  const projects:Project[]=await sanityClient.fetch(projectquery);
+  const socials:Social[]=await sanityClient.fetch(socialquery);
+
 
   return {
-    props: {
+    props:{
       skills,
       projects,
-    
-    },
-    revalidate: 10,
-  };
-};
+      socials,
+    }
+  }
+}
+
+
+

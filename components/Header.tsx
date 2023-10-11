@@ -48,8 +48,9 @@ function Header({ socials }: Props) {
           bgColor="transparent"
         /> */}
       </motion.div>
-      <Link href="#contact">
+      
         <motion.div
+        onClick={()=>(window.location.href="#contact")}
           initial={{
             x: 500,
             opacity: 0,
@@ -76,7 +77,7 @@ function Header({ socials }: Props) {
             Get in touch
           </p>
         </motion.div>
-      </Link>
+      
     </header>
   );
 }
